@@ -1,0 +1,4 @@
+org/adminclient/AdminClientApp.class
+org/adminclient/config/AdminClientConfiguration.class
+org/adminclient/service/AdminService.class
+org/adminclient/controller/AdminController.class

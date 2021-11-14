@@ -105,6 +105,8 @@ public class AdminService {
 		Collection<AlterConfigOp> updatedEntryCollection = new ArrayList<>();
 		
 		
+		// remove
+		
 		List<Map<String, Object>> newParams = new ArrayList<>();
 		Map<String, Object> param1 = new HashMap<String, Object>();
 		Map<String, Object> param2 = new HashMap<String, Object>();
@@ -117,14 +119,21 @@ public class AdminService {
 		param3.put("compression.type", "uncompressed");
 		newParams.add(param3);
 		System.out.println("New Params: ==>>" + newParams);
-		// for each new property
+		
+		// remove
+		
+		for (Map<String, Object> param: newParams) {
+		    for (Map.Entry<String, Object> entry : param.entrySet()) {
+		        String key = entry.getKey();
+				System.out.println("GETTING PARAM KEY: " + key);
+		        Object value = entry.getValue();
+				System.out.println("GETTING PARAM VALUE: " + value.toString());
 
-		for(Map<String, Object> param: newParams) {
-			//Set<Entry<String, Object>> key =  param.entrySet();
-			//ConfigEntry entry = new ConfigEntry(key, (String) newParams.);
-			//System.out.println("Adding entry to newConfigMap:: Key: " + keyString + " Value: " + newParam.get(keyString));
-			//AlterConfigOp alterConfigOp = new AlterConfigOp(entry, AlterConfigOp.OpType.SET);
-			//updatedEntryCollection.add(alterConfigOp);
+				ConfigEntry paramEntry = new ConfigEntry(key, value.toString());
+				System.out.println("Adding entry to newConfigMap:: Key: " + key + " Value: " + value);
+				AlterConfigOp alterConfigOp = new AlterConfigOp(paramEntry, AlterConfigOp.OpType.SET); //Append(List), Delete, Set, Subtract(List) 
+				updatedEntryCollection.add(alterConfigOp);
+		    }
 		
 		}
 		
